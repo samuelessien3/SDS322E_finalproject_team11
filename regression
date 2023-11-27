@@ -1,0 +1,18 @@
+library(ggplot2)
+
+mixbev <- read.csv("mixbev_txsub.csv")
+
+# Scatter plot with regression line
+ggplot(data = mixbev, aes(x = Total.Receipts, y = Liquor.Receipts, color = as.factor(Taxpayer.County))) +
+  labs(x = "Total Receipts (dollars)", y = "Total Liquor Receipts (dollars)", title = "Total Receipts over Liquor Receipts") +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +  # Add regression line without confidence interval
+  theme(legend.position = 'none')
+
+# Linear regression model
+lm_model <- lm(Liquor.Receipts ~ Total.Receipts, data = mixbev)
+
+summary(lm_model)
+
+boxplot(Total.Receipts ~ Inside.Outside.City.Limits, data = mixbev, main = "Inside/Outside City Limits",
+        xlab = "Inside City Limits (yes/no)", ylab = "Total Alcohol Receipt (dollars)", col = c("blue", "darkgreen"))
