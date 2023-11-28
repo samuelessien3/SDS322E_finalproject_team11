@@ -1,12 +1,10 @@
 library(ggplot2)
 
-# Read the data from CSV
 mixbev <- read.csv("mixbev_txsub.csv")
 
-# Fit a linear regression model
+#regession line using lm function 
 lm_model <- lm(Liquor.Receipts ~ Total.Receipts, data = mixbev)
 
-# Scatterplot with regression line
 ggplot(data = mixbev, aes(x = Total.Receipts, y = Liquor.Receipts, color = as.factor(Taxpayer.County))) +
   labs(x = "Total Receipts (dollars)", y = "Total Liquor Receipts (dollars)", title = "Total Receipts over Liquor Receipts") +
   geom_point() +
